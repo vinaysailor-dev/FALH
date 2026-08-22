@@ -116,9 +116,11 @@
   if (data.settings.autorotateEnabled) {
     autorotateToggleElement.classList.add('enabled');
   }
+  // Kiosk mode: always keep autorotate enabled, regardless of settings.
+  autorotateToggleElement.classList.add('enabled');
 
-  // Set handler for autorotate toggle.
-  autorotateToggleElement.addEventListener('click', toggleAutorotate);
+  // Kiosk mode: disable manual autorotate toggle so it can't be turned off permanently.
+  // autorotateToggleElement.addEventListener('click', toggleAutorotate);
 
   // Set up fullscreen mode, if supported.
   if (screenfull.enabled && data.settings.fullscreenButton) {
@@ -226,7 +228,7 @@
       return;
     }
     viewer.startMovement(autorotate);
-    viewer.setIdleMovement(3000, autorotate);
+    viewer.setIdleMovement(1500, autorotate);
   }
 
   function stopAutorotate() {
