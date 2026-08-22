@@ -828,3 +828,105 @@ body.view-control-buttons .viewControlButton {
 .viewControlButton-6 {
   margin-left: 105px;
 }
+
+/* PIN lock screen */
+
+#pinLock {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20000;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
+
+#pinLock.unlocked {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#pinLockBox {
+  text-align: center;
+}
+
+#pinDigits {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.pinDigit {
+  width: 60px;
+  height: 70px;
+  font-size: 26px;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  outline: none;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.pinDigit:focus {
+  border-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.1);
+}
+
+.pinDigit.shake {
+  -webkit-animation: pinShake 0.3s;
+  animation: pinShake 0.3s;
+  border-color: rgba(255,80,80,0.7);
+}
+
+@-webkit-keyframes pinShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@keyframes pinShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+#pinLabel {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.5px;
+}
+
+#pinCancel {
+  margin-left: 10px;
+  color: rgba(255,255,255,0.45);
+  cursor: pointer;
+}
+
+#pinCancel:hover {
+  color: rgba(255,255,255,0.75);
+}
+
+#pinError {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: #ff6b6b;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+#pinError.visible {
+  opacity: 1;
+}

@@ -10,6 +10,19 @@
 </head>
 <body class="multiple-scenes ">
 
+<div id="pinLock">
+  <div id="pinLockBox">
+    <div id="pinDigits">
+      <input type="text" class="pinDigit" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off">
+      <input type="text" class="pinDigit" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off">
+      <input type="text" class="pinDigit" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off">
+      <input type="text" class="pinDigit" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off">
+    </div>
+    <div id="pinLabel">Enter PIN <span id="pinCancel">Cancel</span></div>
+    <p id="pinError">Incorrect PIN. Try again.</p>
+  </div>
+</div>
+
 <div id="pano"></div>
 
 <div id="sceneList">
@@ -70,6 +83,68 @@
 
 <script src="data.js"></script>
 <script src="index.js"></script>
+
+<script>
+(function () {
+  var CORRECT_PIN = "2626"; // <-- change this to whatever PIN you want
+
+  var lock = document.getElementById("pinLock");
+  var digits = Array.prototype.slice.call(document.querySelectorAll(".pinDigit"));
+  var error = document.getElementById("pinError");
+  var cancel = document.getElementById("pinCancel");
+
+  function currentValue() {
+    return digits.map(function (d) { return d.value; }).join("");
+  }
+
+  function clearDigits() {
+    digits.forEach(function (d) { d.value = ""; });
+    digits[0].focus();
+  }
+
+  function tryUnlock() {
+    if (currentValue() === CORRECT_PIN) {
+      lock.classList.add("unlocked");
+      setTimeout(function () {
+        lock.style.display = "none";
+      }, 400);
+    } else {
+      error.classList.add("visible");
+      digits.forEach(function (d) { d.classList.add("shake"); });
+      setTimeout(function () {
+        digits.forEach(function (d) { d.classList.remove("shake"); });
+        clearDigits();
+      }, 300);
+    }
+  }
+
+  digits.forEach(function (digit, i) {
+    digit.addEventListener("input", function () {
+      digit.value = digit.value.replace(/[^0-9]/g, "").slice(-1);
+      error.classList.remove("visible");
+      if (digit.value && i < digits.length - 1) {
+        digits[i + 1].focus();
+      }
+      if (digits.every(function (d) { return d.value; })) {
+        tryUnlock();
+      }
+    });
+
+    digit.addEventListener("keydown", function (e) {
+      if (e.key === "Backspace" && !digit.value && i > 0) {
+        digits[i - 1].focus();
+      }
+    });
+  });
+
+  cancel.addEventListener("click", clearDigits);
+
+  // Focus the first box as soon as the page loads
+  window.addEventListener("load", function () {
+    digits[0].focus();
+  });
+})();
+</script>
 
 </body>
 </html>
