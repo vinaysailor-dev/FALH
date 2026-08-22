@@ -786,8 +786,8 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
   width: 40px;
   height: 40px;
   padding: 5px;
-  background-color: rgba(103, 115, 131, 0.104);
-  background-color: rgba(103, 115, 131, 0.158);
+  background-color: rgba(103, 115, 131, 0);
+  
 }
 
 body.view-control-buttons .viewControlButton {
