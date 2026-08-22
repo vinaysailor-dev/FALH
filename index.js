@@ -409,7 +409,7 @@
   }
 
   // Auto-switch to the next scene every 5 minutes
-  var sceneChangeMinutes = 5; // change this number to adjust timing
+  var sceneChangeMinutes = 0.5; // change this number to adjust timing
   var currentSceneIndex = 0;
   setInterval(function() {
     currentSceneIndex = (currentSceneIndex + 1) % scenes.length;
