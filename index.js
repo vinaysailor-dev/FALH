@@ -109,18 +109,16 @@
 
   // Set up autorotate, if enabled.
   var autorotate = Marzipano.autorotate({
-    yawSpeed: 0.07,
+    yawSpeed: 0.03,
     targetPitch: 0,
     targetFov: Math.PI/2
   });
   if (data.settings.autorotateEnabled) {
     autorotateToggleElement.classList.add('enabled');
   }
-  // Kiosk mode: always keep autorotate enabled, regardless of settings.
-  autorotateToggleElement.classList.add('enabled');
 
-  // Kiosk mode: disable manual autorotate toggle so it can't be turned off permanently.
-  // autorotateToggleElement.addEventListener('click', toggleAutorotate);
+  // Set handler for autorotate toggle.
+  autorotateToggleElement.addEventListener('click', toggleAutorotate);
 
   // Set up fullscreen mode, if supported.
   if (screenfull.enabled && data.settings.fullscreenButton) {
@@ -228,7 +226,7 @@
       return;
     }
     viewer.startMovement(autorotate);
-    viewer.setIdleMovement(1500, autorotate);
+    viewer.setIdleMovement(3000, autorotate);
   }
 
   function stopAutorotate() {

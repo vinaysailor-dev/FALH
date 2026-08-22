@@ -1,39 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>FALH</title>
+<title>Project Title</title>
 <meta charset="utf-8">
 <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
 <style> @-ms-viewport { width: device-width; } </style>
 <link rel="stylesheet" href="vendor/reset.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="multiple-scenes ">
-
-<div id="pinLock">
-  <div id="pinLockBox">
-    <div id="pinDigits">
-      <input type="text" class="pinDigit" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off">
-      <input type="text" class="pinDigit" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off">
-      <input type="text" class="pinDigit" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off">
-      <input type="text" class="pinDigit" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off">
-    </div>
-    <div id="pinLabel">Enter PIN <span id="pinCancel">Cancel</span></div>
-    <p id="pinError">Incorrect PIN. Try again.</p>
-  </div>
-</div>
+<body class="multiple-scenes view-control-buttons">
 
 <div id="pano"></div>
 
 <div id="sceneList">
   <ul class="scenes">
     
-      <a href="javascript:void(0)" class="scene" data-id="0-falh-interactive-wall-jpg">
-        <li class="text">FALH INTERACTIVE WALL JPG</li>
+      <a href="javascript:void(0)" class="scene" data-id="0-1-entry">
+        <li class="text">1 Entry</li>
       </a>
     
-      <a href="javascript:void(0)" class="scene" data-id="1-falh-play-area-jpg">
-        <li class="text">FALH PLAY AREA JPG</li>
+      <a href="javascript:void(0)" class="scene" data-id="1-2-reception">
+        <li class="text">2 reception</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="2-3-robitics-class">
+        <li class="text">3 robitics class</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="3-4-librery">
+        <li class="text">4 librery</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="4-5-courtyard">
+        <li class="text">5 courtyard</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="5-6-toilet">
+        <li class="text">6 toilet</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="6-7-clasroom">
+        <li class="text">7 Clasroom</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="7-8-turf">
+        <li class="text">8 turf</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="8-9-open-turf">
+        <li class="text">9 open turf</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="9-10-staff-room">
+        <li class="text">10 Staff Room</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="10-11-cordinator-cabin">
+        <li class="text">11 Cordinator cabin</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="11-12-play-area">
+        <li class="text">12 Play Area</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="12-13-sr-kg-jr-kg-class">
+        <li class="text">13 sr kg jr kg class</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="13-14-wall-climbing">
+        <li class="text">14 wall climbing</li>
       </a>
     
   </ul>
@@ -83,68 +118,6 @@
 
 <script src="data.js"></script>
 <script src="index.js"></script>
-
-<script>
-(function () {
-  var CORRECT_PIN = "2626"; // <-- change this to whatever PIN you want
-
-  var lock = document.getElementById("pinLock");
-  var digits = Array.prototype.slice.call(document.querySelectorAll(".pinDigit"));
-  var error = document.getElementById("pinError");
-  var cancel = document.getElementById("pinCancel");
-
-  function currentValue() {
-    return digits.map(function (d) { return d.value; }).join("");
-  }
-
-  function clearDigits() {
-    digits.forEach(function (d) { d.value = ""; });
-    digits[0].focus();
-  }
-
-  function tryUnlock() {
-    if (currentValue() === CORRECT_PIN) {
-      lock.classList.add("unlocked");
-      setTimeout(function () {
-        lock.style.display = "none";
-      }, 400);
-    } else {
-      error.classList.add("visible");
-      digits.forEach(function (d) { d.classList.add("shake"); });
-      setTimeout(function () {
-        digits.forEach(function (d) { d.classList.remove("shake"); });
-        clearDigits();
-      }, 300);
-    }
-  }
-
-  digits.forEach(function (digit, i) {
-    digit.addEventListener("input", function () {
-      digit.value = digit.value.replace(/[^0-9]/g, "").slice(-1);
-      error.classList.remove("visible");
-      if (digit.value && i < digits.length - 1) {
-        digits[i + 1].focus();
-      }
-      if (digits.every(function (d) { return d.value; })) {
-        tryUnlock();
-      }
-    });
-
-    digit.addEventListener("keydown", function (e) {
-      if (e.key === "Backspace" && !digit.value && i > 0) {
-        digits[i - 1].focus();
-      }
-    });
-  });
-
-  cancel.addEventListener("click", clearDigits);
-
-  // Focus the first box as soon as the page loads
-  window.addEventListener("load", function () {
-    digits[0].focus();
-  });
-})();
-</script>
 
 </body>
 </html>
