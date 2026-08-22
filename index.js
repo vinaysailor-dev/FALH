@@ -390,28 +390,3 @@
   switchScene(scenes[0]);
 
 })();
-
-  // ---- Kiosk mode additions ----
-
-  // Always keep autorotate enabled
-  autorotateToggleElement.classList.add('enabled');
-
-  // Prevent the pause button from turning rotation off
-  autorotateToggleElement.addEventListener('click', function(e) {
-    e.stopImmediatePropagation();
-  }, true);
-
-  // Resume rotation quickly after someone drags/clicks
-  function startAutorotate() {
-    if (!autorotateToggleElement.classList.contains('enabled')) return;
-    viewer.startMovement(autorotate);
-    viewer.setIdleMovement(1500, autorotate);
-  }
-
-  // Auto-switch to the next scene every 5 minutes
-  var sceneChangeMinutes = 0.5; // change this number to adjust timing
-  var currentSceneIndex = 0;
-  setInterval(function() {
-    currentSceneIndex = (currentSceneIndex + 1) % scenes.length;
-    switchScene(scenes[currentSceneIndex]);
-  }, sceneChangeMinutes * 60 * 1000);
