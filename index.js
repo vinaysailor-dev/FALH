@@ -70,6 +70,9 @@
   // Initialize viewer.
   var viewer = new Marzipano.Viewer(panoElement, viewerOpts);
 
+  // Keep track of the currently active scene (useful if you extend this later).
+  var currentScene = null;
+
   // Create scenes.
   var scenes = data.scenes.map(function(data) {
     var urlPrefix = "tiles";
@@ -183,13 +186,57 @@
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
   }
 
-  function switchScene(scene) {
+  // ---- Street-View-style transition ----
+  // hotspotYaw/hotspotPitch (optional) = the direction the user clicked,
+  // so the new scene can "zoom in" from that direction, like walking toward it.
+  function switchScene(scene, hotspotYaw, hotspotPitch) {
     stopAutorotate();
-    scene.view.setParameters(scene.data.initialViewParameters);
-    scene.scene.switchTo();
+
+    var duration = 900; // transition length in ms, tweak to taste
+
+    var targetParams = scene.data.initialViewParameters;
+
+    // Starting view for the incoming scene: zoomed in (smaller fov),
+    // and if we know which direction was clicked, aimed roughly that way.
+    var startYaw   = (typeof hotspotYaw === 'number') ? hotspotYaw : targetParams.yaw;
+    var startPitch = (typeof hotspotPitch === 'number') ? hotspotPitch : targetParams.pitch;
+    var startFov   = targetParams.fov * 0.45; // smaller fov = zoomed in
+
+    scene.view.setParameters({
+      yaw: startYaw,
+      pitch: startPitch,
+      fov: startFov
+    });
+
+    scene.scene.switchTo({
+      transitionDuration: duration,
+      transitionUpdate: function(val) {
+        // val goes from 0 -> 1 over the course of the transition
+
+        // Cross-fade (kept for smoothness, layered under the zoom/pan)
+        scene.scene.layer().mergeEffects({ opacity: val });
+
+        // Ease yaw/pitch/fov from the "walking toward" start point
+        // to the scene's normal initial view.
+        var eased = easeOutCubic(val);
+
+        scene.view.setParameters({
+          yaw:   startYaw   + (targetParams.yaw   - startYaw)   * eased,
+          pitch: startPitch + (targetParams.pitch - startPitch) * eased,
+          fov:   startFov   + (targetParams.fov   - startFov)   * eased
+        });
+      }
+    });
+
+    currentScene = scene;
     startAutorotate();
     updateSceneName(scene);
     updateSceneList(scene);
+  }
+
+  // Simple easing curve so the zoom/pan decelerates instead of moving linearly.
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
   }
 
   function updateSceneName(scene) {
@@ -227,7 +274,7 @@
       return;
     }
     viewer.startMovement(autorotate);
-    viewer.setIdleMovement(3000, autorotate);
+    viewer.setIdleMovement(1500, autorotate);
   }
 
   function stopAutorotate() {
@@ -265,8 +312,9 @@
     }
 
     // Add click event handler.
+    // Pass this hotspot's yaw/pitch so the transition can "zoom toward" it.
     wrapper.addEventListener('click', function() {
-      switchScene(findSceneById(hotspot.target));
+      switchScene(findSceneById(hotspot.target), hotspot.yaw, hotspot.pitch);
     });
 
     // Prevent touch and scroll events from reaching the parent element.
@@ -399,12 +447,5 @@
   autorotateToggleElement.addEventListener('click', function(e) {
     e.stopImmediatePropagation();
   }, true);
-
-  // Resume rotation quickly after someone drags/clicks
-  function startAutorotate() {
-    if (!autorotateToggleElement.classList.contains('enabled')) return;
-    viewer.startMovement(autorotate);
-    viewer.setIdleMovement(1500, autorotate);
-  }
 
 })();
