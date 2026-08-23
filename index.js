@@ -78,7 +78,8 @@
       { cubeMapPreviewUrl: urlPrefix + "/" + data.id + "/preview.jpg" });
     var geometry = new Marzipano.CubeGeometry(data.levels);
 
-    var limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180, 120*Math.PI/180);
+    // Increased faceSize multiplier to allow closer zoom (was: data.faceSize)
+    var limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize * 4, 100*Math.PI/180, 120*Math.PI/180);
     var view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
 
     var scene = viewer.createScene({
@@ -389,7 +390,6 @@
   // Display the initial scene.
   switchScene(scenes[0]);
 
-})();
   // ---- Kiosk mode additions ----
 
   // Always keep autorotate enabled
@@ -407,4 +407,4 @@
     viewer.setIdleMovement(1500, autorotate);
   }
 
- 
+})();
