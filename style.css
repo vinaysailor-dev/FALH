@@ -828,3 +828,208 @@ body.view-control-buttons .viewControlButton {
 .viewControlButton-6 {
   margin-left: 105px;
 }
+
+/* Full-screen tour interface inspired by the reference experience. */
+html, body {
+  font-family: Inter, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: #101a28;
+}
+
+#titleBar {
+  z-index: 20;
+  top: 14px;
+  left: 18px !important;
+  right: auto !important;
+  width: min(250px, calc(100vw - 36px));
+  height: auto;
+  text-align: left;
+  pointer-events: none;
+}
+
+#titleBar .sceneName {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+  background: transparent;
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.035em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, .62);
+  text-overflow: ellipsis;
+}
+
+#sceneList {
+  z-index: 21;
+  top: 14px;
+  left: auto !important;
+  right: 16px;
+  width: calc(100% - 300px);
+  max-width: calc(100% - 300px);
+  max-height: none;
+  padding: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-left: 0 !important;
+  scrollbar-width: none;
+  transition: none;
+}
+
+#sceneList::-webkit-scrollbar { display: none; }
+
+#sceneList .scenes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+  width: max-content;
+  min-width: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+#sceneList .scene,
+.mobile #sceneList .scene {
+  display: block;
+  flex: 0 0 auto;
+  width: auto;
+  height: 38px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 999px;
+  color: rgba(255,255,255,.88);
+  background: rgba(20, 35, 54, .28);
+  box-shadow: 0 8px 26px rgba(4, 13, 25, .18), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+#sceneList .scene .text,
+.mobile #sceneList .scene .text {
+  width: auto;
+  height: 100%;
+  padding: 0 15px;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: .01em;
+}
+
+.no-touch #sceneList .scene:hover {
+  color: #fff;
+  background: rgba(31, 55, 83, .58);
+  border-color: rgba(255,255,255,.48);
+  transform: translateY(-1px);
+}
+
+#sceneList .scene.current {
+  color: #172338;
+  background: #fff;
+  border-color: #fff;
+}
+
+#sceneListToggle { display: none; }
+
+#autorotateToggle,
+#fullscreenToggle {
+  z-index: 22;
+  right: 16px !important;
+  top: auto;
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 10px;
+  background: rgba(20, 35, 54, .3);
+  box-shadow: 0 8px 26px rgba(4, 13, 25, .2), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+}
+
+#fullscreenToggle { bottom: 16px; }
+#autorotateToggle { bottom: 66px; }
+body.fullscreen-enabled #autorotateToggle { right: 16px !important; }
+
+#autorotateToggle .icon,
+#fullscreenToggle .icon {
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+.viewControlButton {
+  z-index: 22;
+  bottom: 16px;
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(20, 35, 54, .28);
+  box-shadow: 0 8px 26px rgba(4, 13, 25, .18), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+}
+
+.viewControlButton:first-of-type { border-radius: 13px 0 0 13px; }
+.viewControlButton:last-of-type { border-radius: 0 13px 13px 0; }
+.viewControlButton .icon {
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 900px) {
+  #titleBar { top: 12px; left: 14px !important; width: 190px; }
+  #sceneList {
+    top: 58px;
+    left: 12px !important;
+    right: 12px;
+    width: auto;
+    max-width: none;
+  }
+  #sceneList .scenes { justify-content: flex-start; }
+  #sceneList .scene, .mobile #sceneList .scene { height: 36px; }
+  #sceneList .scene .text, .mobile #sceneList .scene .text {
+    padding: 0 13px;
+    font-size: 11px;
+    line-height: 34px;
+  }
+}
+
+@media (max-width: 500px) {
+  #titleBar { top: 12px; left: 14px !important; width: calc(100% - 28px); }
+  #titleBar .sceneName { font-size: 22px; }
+  #sceneList {
+    top: 54px;
+    left: 10px !important;
+    right: 10px;
+    width: auto;
+    height: auto;
+    max-height: none;
+  }
+  #sceneList .scenes { min-width: 100%; }
+  #autorotateToggle, #fullscreenToggle {
+    right: 12px !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+  }
+  #autorotateToggle .icon, #fullscreenToggle .icon {
+    top: 3px;
+    right: 3px;
+    width: 22px;
+    height: 22px;
+  }
+  #fullscreenToggle { bottom: 12px; }
+  #autorotateToggle { bottom: 60px; }
+  body.fullscreen-enabled #autorotateToggle { right: 12px !important; }
+  body.view-control-buttons .viewControlButton { display: none; }
+}
