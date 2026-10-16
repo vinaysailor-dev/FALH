@@ -26,6 +26,16 @@
   var sceneNameElement = document.querySelector('#titleBar .sceneName');
   var sceneListElement = document.querySelector('#sceneList');
   var sceneElements = document.querySelectorAll('#sceneList .scene');
+  // Use each scene's low-resolution forward tile as a compact navigation thumbnail.
+  for (var i = 0; i < sceneElements.length; i++) {
+    var thumbnail = document.createElement('img');
+    thumbnail.className = 'scene-thumbnail';
+    thumbnail.src = 'tiles/' + sceneElements[i].getAttribute('data-id') + '/1/f/0/0.jpg';
+    thumbnail.alt = '';
+    thumbnail.setAttribute('aria-hidden', 'true');
+    thumbnail.loading = 'lazy';
+    sceneElements[i].insertBefore(thumbnail, sceneElements[i].firstChild);
+  }
   var sceneListToggleElement = document.querySelector('#sceneListToggle');
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');

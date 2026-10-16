@@ -577,6 +577,32 @@ var APP_DATA = {
         }
       ],
       "infoHotspots": []
+    },
+    {
+      "id": "0-panorama_fsm-sketchup-17062026_2026-08-24-15-34-34",
+      "name": "Classroom",
+      "levels": [
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 2048,
+      "initialViewParameters": {
+        "yaw": 0,
+        "pitch": 0,
+        "fov": 1.2599180821480807
+      },
+      "linkHotspots": [],
+      "infoHotspots": []
     }
   ],
   "name": "FALH",

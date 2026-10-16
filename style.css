@@ -1033,3 +1033,196 @@ body.fullscreen-enabled #autorotateToggle { right: 16px !important; }
   body.fullscreen-enabled #autorotateToggle { right: 12px !important; }
   body.view-control-buttons .viewControlButton { display: none; }
 }
+
+/* Thumbnail navigation replaces the bottom zoom controls. */
+#sceneList {
+  z-index: 30;
+  top: auto !important;
+  right: 14px !important;
+  bottom: 14px;
+  left: 14px !important;
+  width: auto !important;
+  max-width: none !important;
+  height: 106px;
+  max-height: 106px !important;
+  padding: 7px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 17px;
+  background: rgba(18, 31, 48, .28);
+  box-shadow: 0 12px 32px rgba(4,13,25,.22), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.48) rgba(255,255,255,.08);
+}
+
+#sceneList::-webkit-scrollbar { display: block; height: 4px; }
+#sceneList::-webkit-scrollbar-track { background: rgba(255,255,255,.08); border-radius: 4px; }
+#sceneList::-webkit-scrollbar-thumb { background: rgba(255,255,255,.48); border-radius: 4px; }
+
+#sceneList .scenes,
+.mobile #sceneList .scenes {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 8px;
+  width: max-content;
+  min-width: 100%;
+  height: 90px;
+  background: transparent;
+}
+
+#sceneList .scene,
+.mobile #sceneList .scene {
+  display: flex;
+  flex: 0 0 112px;
+  flex-direction: column;
+  align-items: stretch;
+  width: 112px;
+  height: 88px;
+  padding: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  box-shadow: none;
+  transform: none;
+}
+
+#sceneList .scene-thumbnail {
+  display: block;
+  flex: 0 0 57px;
+  width: 100%;
+  height: 57px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: rgba(0,0,0,.2);
+}
+
+#sceneList .scene .text,
+.mobile #sceneList .scene .text {
+  display: block;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 20px;
+  padding: 4px 3px 0;
+  overflow: hidden;
+  color: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 13px;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+#sceneList .scene.current {
+  border-color: rgba(255,255,255,.88);
+  background: rgba(255,255,255,.2);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+}
+
+.no-touch #sceneList .scene:hover {
+  border-color: rgba(255,255,255,.54);
+  background: rgba(255,255,255,.17);
+  transform: translateY(-2px);
+}
+
+#sceneListToggle,
+.viewControlButton {
+  display: none !important;
+}
+
+#autorotateToggle,
+#fullscreenToggle {
+  top: 14px !important;
+  right: 14px !important;
+  bottom: auto !important;
+}
+
+#fullscreenToggle { top: 54px !important; }
+body.fullscreen-enabled #autorotateToggle { right: 14px !important; }
+
+@media (max-width: 500px) {
+  #sceneList {
+    right: 8px !important;
+    bottom: 8px;
+    left: 8px !important;
+    height: 98px;
+    max-height: 98px !important;
+    padding: 6px;
+    border-radius: 14px;
+  }
+  #sceneList .scenes, .mobile #sceneList .scenes { height: 84px; gap: 7px; }
+  #sceneList .scene, .mobile #sceneList .scene {
+    flex-basis: 102px;
+    width: 102px;
+    height: 82px;
+    padding: 3px;
+  }
+  #sceneList .scene-thumbnail { flex-basis: 53px; height: 53px; }
+  #autorotateToggle, #fullscreenToggle { right: 10px !important; }
+  body.fullscreen-enabled #autorotateToggle { right: 10px !important; }
+}
+
+#brandLogo {
+  position: absolute;
+  z-index: 25;
+  top: 14px;
+  left: 14px;
+  width: min(230px, 22vw);
+  height: auto;
+  opacity: .7;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,.28));
+}
+
+#titleBar {
+  top: 12px !important;
+  left: 50% !important;
+  right: auto !important;
+  width: max-content;
+  max-width: calc(100vw - 300px);
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+#titleBar .sceneName {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  padding: 8px 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 14px;
+  background: rgba(18,31,48,.3);
+  box-shadow: 0 8px 24px rgba(4,13,25,.18), inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter: blur(14px) saturate(145%);
+  -webkit-backdrop-filter: blur(14px) saturate(145%);
+  font-size: 16px;
+  line-height: 1.15;
+}
+
+@media (max-width: 700px) {
+  #brandLogo {
+    top: 10px;
+    left: 10px;
+    width: min(145px, 32vw);
+  }
+  #titleBar {
+    top: 64px !important;
+    left: 50% !important;
+    width: max-content;
+    max-width: calc(100vw - 24px);
+  }
+  #titleBar .sceneName {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+  #autorotateToggle, #fullscreenToggle { top: 10px !important; }
+  #fullscreenToggle { top: 48px !important; }
+}
