@@ -14,71 +14,40 @@
 
 <img id="brandLogo" src="img/falh-logo.png" alt="Fountainhead Avadh Learning Hub">
 
-<div id="sceneList">
-  <ul class="scenes">
-    
-      <a href="javascript:void(0)" class="scene" data-id="0-entry">
-        <li class="text">Entry</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="1-reception">
-        <li class="text">Reception</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="2-makerspace">
-        <li class="text">Makerspace</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="3-play-group-class">
-        <li class="text">Play Group Class</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="4-wide-passage">
-        <li class="text">Wide Passage</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="5-nursery-classroom">
-        <li class="text">Nursery Classroom</li>
-      </a>
-
-      <a href="javascript:void(0)" class="scene" data-id="0-panorama_fsm-sketchup-17062026_2026-08-24-15-34-34">
-        <li class="text">Classroom</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="6-turf">
-        <li class="text">Turf</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="7-staff-room">
-        <li class="text">Staff Room</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="8-cordinator-room">
-        <li class="text">Cordinator Room</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="9-play-area">
-        <li class="text">Play Area</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="10-sr-kg-jr-kg-class">
-        <li class="text">Sr kg Jr kg Class</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="11-sensorial-play-area">
-        <li class="text">Sensorial Play Area</li>
-      </a>
-    
-      <a href="javascript:void(0)" class="scene" data-id="12-courtyard">
-        <li class="text">Courtyard</li>
-      </a>
-
-    
-  </ul>
+<div id="titleBar">
+  <select id="sceneSelect" aria-label="Choose a location">
+    <option value="0-entry">Entry</option>
+    <option value="1-reception">Reception</option>
+    <option value="2-makerspace">Makerspace</option>
+    <option value="3-play-group-class">Play Group Class</option>
+    <option value="4-wide-passage">Wide Passage</option>
+    <option value="5-nursery-classroom">Nursery Classroom</option>
+    <option value="6-turf">Turf</option>
+    <option value="7-staff-room">Staff Room</option>
+    <option value="8-cordinator-room">Cordinator Room</option>
+    <option value="9-play-area">Play Area</option>
+    <option value="10-sr-kg-jr-kg-class">Sr kg Jr kg Class</option>
+    <option value="11-sensorial-play-area">Sensorial Play Area</option>
+    <option value="12-courtyard">Courtyard</option>
+  </select>
 </div>
 
-<div id="titleBar">
-  <h1 class="sceneName"></h1>
+<div id="sceneList">
+  <ul class="scenes">
+    <a href="javascript:void(0)" class="scene" data-id="0-entry"><li class="text">Entry</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="1-reception"><li class="text">Reception</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="2-makerspace"><li class="text">Makerspace</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="3-play-group-class"><li class="text">Play Group Class</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="4-wide-passage"><li class="text">Wide Passage</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="5-nursery-classroom"><li class="text">Nursery Classroom</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="6-turf"><li class="text">Turf</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="7-staff-room"><li class="text">Staff Room</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="8-cordinator-room"><li class="text">Cordinator Room</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="9-play-area"><li class="text">Play Area</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="10-sr-kg-jr-kg-class"><li class="text">Sr kg Jr kg Class</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="11-sensorial-play-area"><li class="text">Sensorial Play Area</li></a>
+    <a href="javascript:void(0)" class="scene" data-id="12-courtyard"><li class="text">Courtyard</li></a>
+  </ul>
 </div>
 
 <a href="javascript:void(0)" id="autorotateToggle">
@@ -89,11 +58,6 @@
 <a href="javascript:void(0)" id="fullscreenToggle">
   <img class="icon off" src="img/fullscreen.png">
   <img class="icon on" src="img/windowed.png">
-</a>
-
-<a href="javascript:void(0)" id="sceneListToggle">
-  <img class="icon off" src="img/expand.png">
-  <img class="icon on" src="img/collapse.png">
 </a>
 
 <a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
